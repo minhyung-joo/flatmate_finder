@@ -1,25 +1,7 @@
-/*
-//////////////////////////////////////////////////////////
-// firebase
-//////////////////////////////////////////////////////////
-<script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyCxEIuUGBV-Ny4eIu46cuN75hsCoBVmXss",
-    authDomain: "hackjam2016underdogflatmate.firebaseapp.com",
-    databaseURL: "https://hackjam2016underdogflatmate.firebaseio.com",
-    storageBucket: "hackjam2016underdogflatmate.appspot.com",
-    messagingSenderId: "979213610760"
-  };
-  firebase.initializeApp(config);
-</script>
-*/
 
 //////////////////////////////////////////////////////////
 // configurations
 //////////////////////////////////////////////////////////
-var RUNNING_ON_ITSC_SERVER = false;
 var webpack = require('webpack')
 var webpackDevMiddleware = require('webpack-dev-middleware')
 var webpackHotMiddleware = require('webpack-hot-middleware')
@@ -32,46 +14,10 @@ var app = express();
 
 var path = require("path");
 
-var server_ip_address = process.env.OPENSHIFT_NODEJS_IP; // only for openshift
-var DATABASE_URL;
-
-// //////////////// on openshift
-// if (process.env.OPENSHIFT_NODEJS_PORT) {
-//   DATABASE_URL = process.env.OPENSHIFT_POSTGRESQL_DB_URL;//"postgresql://adminmnvdci3:72fAHfuEN5q6";
-//
-//   app.set('port', (process.env.OPENSHIFT_NODEJS_PORT || 8080));
-//   app.listen(app.get('port'), server_ip_address, function() {
-//     console.log('Node (openshift) app is running on port', app.get('port'));
-//   });
-// }
-// /////////////// on heroku or local
-// else {
-//   DATABASE_URL = process.env.DATABASE_URL
-//     || "postgres://bibcnlyezwlkhl:gdhvCdkdw5znI-LjSspT6wKOfR@ec2-54-225-223-40.compute-1.amazonaws.com:5432/davktp8lndlj83"+'?ssl=true';
-//
-//   app.set('port', (process.env.PORT || 5000));
-//   app.listen(app.get('port'), function() {
-//     console.log('Node (heroku & local) app is running on port', app.get('port'));
-//   });
-// }
-if (RUNNING_ON_ITSC_SERVER) {
-  process.chdir("/home/guacamoli/guacamoli");
-  DATABASE_URL = "postgres://guacamoli:1234@localhost:5432/guacamoli";
-  app.set('port', 80);
-  app.listen(app.get('port'), function() {
-    console.log('Node (ust.hk) app is running on port', app.get('port'));
-  });
-}
-else {
-  DATABASE_URL = process.env.DATABASE_URL
-                || "postgres://bibcnlyezwlkhl:gdhvCdkdw5znI-LjSspT6wKOfR@ec2-54-225-223-40.compute-1.amazonaws.com:5432/davktp8lndlj83"+'?ssl=true';
-
-  app.set('port', (process.env.PORT || 5000));
-  app.listen(app.get('port'), function() {
-    console.log('Node (heroku & local) app is running on port', app.get('port'));
-  });
-}
-
+app.set('port', (process.env.PORT || 5000));
+app.listen(app.get('port'), function() {
+  console.log('Node (heroku & local) app is running on port', app.get('port'));
+});
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -89,9 +35,6 @@ app.get("/", function(req, res) {
   res.sendFile(path.join(__dirname+'/index.html'));
   //res.sendFile(__dirname + '/index.html')
 });
-
-
-
 
 //////////////////////////////////////////////////////////////
 // admin routes

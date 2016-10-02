@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node app.js",
     "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register --require ./test/setup.js",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
+    "webpack": "node_modules/.bin/webpack"
   },
   "engines": {
     "npm": "3.3.12"
