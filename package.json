@@ -2,10 +2,14 @@
   "name": "hkust25guacamoli",
   "version": "0.0.0",
   "description": "Guacamoli Web",
+  ""
   "scripts": {
-    "start": "node server.js",
+    "start": "node app.js",
     "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register --require ./test/setup.js",
     "test:watch": "npm test -- --watch"
+  },
+  "engines": {
+    "npm": "3.3.12"
   },
   "repository": {
     "type": "git",
