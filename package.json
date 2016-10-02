@@ -2,7 +2,6 @@
   "name": "hkust25guacamoli",
   "version": "0.0.0",
   "description": "Guacamoli Web",
-  ""
   "scripts": {
     "start": "node app.js",
     "test": "cross-env NODE_ENV=test mocha --recursive --compilers js:babel-register --require ./test/setup.js",
